@@ -9,9 +9,10 @@ Main
       <div class="container">
         <div class="row mb-2 py-5">
           <div class="alert-warning alert">
-            <img src="{{ ele.poster }}" alt="" width="500" height="600">
+            <img src="{{ ele.poster.url }}" alt="" width="500" height="600">
             <h1>{{ ele.name }}</h1> 
             <h4>{{ ele.description }}</h4>
+            <a class="btn btn-danger" href="{% url 'show_movie_details' ele.pk %}">Details</a>
           </div>
         </div>
       </div>

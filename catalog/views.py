@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Movie
+from .models import Movie, Booking, MoviePlay
 
 def index(request):
-    movies = Movie.objects.all()
+
+    search_query = request.GET.get('search', None)
+    if search_query:
+        movies = Movie.objects.filter(name__icontains=search_query)
+    else:
+        movies = Movie.objects.all()
     return render(request, 'index.html', { 'movies': movies})
 
 
@@ -16,3 +21,5 @@ def movie_details(request, movie_pk):
         return render(request, 'movie_details.html', {'movie': movie})
     except Movie.DoesNotExist:
         return redirect('Home')
+
+

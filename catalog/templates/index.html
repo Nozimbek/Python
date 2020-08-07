@@ -5,6 +5,20 @@ Main
 {% endblock %}
 
 {% block content %}
+  <div class="container">
+    <form action="{% url 'Home' %}" method="GET">
+      <div class="row">
+        <div class="col-8">
+          <div class="form-group">
+            <input type="text" name="search" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
   {% for ele in movies %}
       <div class="container">
         <div class="row mb-2 py-5">

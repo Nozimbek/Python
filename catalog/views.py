@@ -23,3 +23,10 @@ def movie_details(request, movie_pk):
         return redirect('Home')
 
 
+
+
+def movie_play_details(request, movie_play_pk):
+    pass
+    if request.method == 'GET':
+    #get: show booking form
+    #post: check and save booking

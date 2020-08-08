@@ -19,3 +19,4 @@ class Booking(models.Model):
     for_slot = models.ForeignKey(MoviePlay, on_delete=models.CASCADE, related_name='bookings')
     client_name = models.CharField(max_length=255)
     secret_number = models.CharField(max_length=255)
+

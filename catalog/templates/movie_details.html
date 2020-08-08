@@ -15,6 +15,21 @@ Main
         </div>
       </div>
 
+      <div class="container">
+        {% for movie_play in movie.slots.all %}
+          <div class="card">
+            <div class="card-body">
+              <h4>{{ movie_play.start_time }} - {{ movie_play.end_time }}</h4>
+              <p>Available seats amount: {{ movie_play.available_seats }}</p>
+              <p>
+                <a class="btn btn-primary" href="{% url 'movie_play_details' movie_play.pk %}">Book this slot</a>
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+
 {% endblock %}
 
 

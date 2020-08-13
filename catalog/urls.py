@@ -8,7 +8,7 @@ urlpatterns = [
     path('About', views.about, name="About"),
     path('movies/<int:movie_pk>/', views.movie_details, name='show_movie_details'),
     path('movieplay/<int:movie_play_pk>/', views.movie_play_details, name='movie_play_details'),
-    path('movieplay/<int:movie_play_pk>/thanks.html', views.booked, name="thanks")
+    path('movieplay/<int:movie_play_pk>/thanks', views.booked, name="thanks")
 
 ]
 

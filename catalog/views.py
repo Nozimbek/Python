@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Movie, Booking, MoviePlay
+import random
+from .forms import NameForm
 
 def index(request):
 
@@ -26,7 +28,18 @@ def movie_details(request, movie_pk):
 
 
 def movie_play_details(request, movie_play_pk):
-    pass
+    
     if request.method == 'GET':
-    #get: show booking form
-    #post: check and save booking
+        movie_book = MoviePlay.objects.get(pk=movie_play_pk)
+        random_key = random.random()
+        return render(request, 'movie_play_details.html', {'random_key': random_key})
+    else:
+        form = NameForm(request.POST)
+        if form.is_valid():
+            Booking.client_name = NameForm.client_name
+            Booking.secret_number = random_key
+            return HttpResponseRedirect('thanks')
+           
+
+def booked(request, movie_play_pk):
+    return render(request, 'thanks.html')

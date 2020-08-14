@@ -7,7 +7,5 @@ class BookingForm(forms.ModelForm):
         fields = ['client_name']
 
 class CheckingForm(forms.Form):
-    class Meta:
-        model = Booking
-        secret_number = forms.CharField()
-        client_name = forms.CharField()
+    secret_number = forms.CharField()
+    client_name = forms.CharField()

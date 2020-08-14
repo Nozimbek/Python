@@ -55,7 +55,7 @@ def check(request):
     else:
         checking_form = CheckingForm(request.POST)
         if checking_form.is_valid():
-            secret_number = Booking.objects.filter(checking_form.secret_number)
+            secret_number = Booking.objects.filter(secret_number=checking_form.cleaned_data['secret_number'])
             print(secret_number)
 
 

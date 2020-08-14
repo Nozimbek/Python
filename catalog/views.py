@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Movie, Booking, MoviePlay
 import random
-from .forms import NameForm
+from .forms import BookingForm, CheckingForm
 
 def index(request):
 
@@ -28,18 +28,36 @@ def movie_details(request, movie_pk):
 
 
 def movie_play_details(request, movie_play_pk):
-    
-    if request.method == 'GET':
-        movie_book = MoviePlay.objects.get(pk=movie_play_pk)
-        random_key = random.random()
-        return render(request, 'movie_play_details.html', {'random_key': random_key})
-    else:
-        form = NameForm(request.POST)
-        if form.is_valid():
-            Booking.client_name = NameForm.client_name
-            Booking.secret_number = random_key
-            return HttpResponseRedirect('thanks')
-           
+    try:
+            movie_play = MoviePlay.objects.get(pk=movie_play_pk)
+    except MoviePlay.DoesNotExist:
+        return redirect('Home')
 
-def booked(request, movie_play_pk):
-    return render(request, 'thanks.html')
+    if request.method == 'GET':
+        booking_form = BookingForm()
+        return render(request, 'movie_play_details.html', {'booking_form': booking_form})
+    else:
+        booking_form = BookingForm(request.POST)
+        if booking_form.is_valid():
+            booking = booking_form.save(commit=False)
+            booking.for_slot = movie_play
+            booking.secret_number = random.randint(1000, 9999)
+            booking.save()
+            return render(request, 'booking_done.html', {'booking': booking})
+        else:
+            return render(request, 'movie_play_details.html', {'booking_form': booking_form})
+
+
+def check(request):
+    if request.method == 'GET':
+        checking_form = CheckingForm()
+        return render(request, 'checking_details.html', {'checking_form': checking_form})
+    else:
+        checking_form = CheckingForm(request.POST)
+        if checking_form.is_valid():
+            secret_number = Booking.objects.filter(checking_form.secret_number)
+            print(secret_number)
+
+
+
+

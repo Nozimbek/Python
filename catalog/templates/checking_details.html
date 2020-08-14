@@ -5,11 +5,11 @@ Main
 {% endblock %}
 
 {% block content %}
-<h1>Please book your movie</h1>
+
 <form action="" method="post">
     {% csrf_token %}
-    {{ booking_form.as_p }}
-    <button type="submit">Book</button>
+    {{ checking_form.as_p }}
+    <button type="submit">check</button>
 </form>
 
 

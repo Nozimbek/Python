@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Main
+{% endblock %}
+{% block content %}
+
+<h1>Thank you!</h1>
+<p>Here you can find details of your booking:</p>
+<ul>
+    <li>Your name: {{ booking.client_name }}</li>
+    <li>Your secret number: {{ booking.secret_number }}</li>
+</ul>
+{% endblock %}

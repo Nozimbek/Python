@@ -56,8 +56,9 @@ def check(request):
         checking_form = CheckingForm(request.POST)
         if checking_form.is_valid():
             secret_number = Booking.objects.filter(secret_number=checking_form.cleaned_data['secret_number'])
-            print(secret_number)
-
+            return render(request, 'checking_done.html', {'secret_number': secret_number})
+        else:
+            redirect(movie_play_details.html)
 
 
 
